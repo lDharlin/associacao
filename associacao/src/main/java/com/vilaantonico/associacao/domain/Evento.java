@@ -12,34 +12,37 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_evento")
+    private Long idEvento;
 
-    @Column(name = "nome")
+    @Column(name = "nome", length = 50, nullable = false)
     private String nome;
 
-    @Column(name = "local")
-    private String local;
+    @Column(name = "descricao", length = 100, nullable = false)
+    private String descricao;
 
-    @Column(name = "dataInicio")
+    @Column(name = "data_inicio", nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataInicio;
 
-    @Column(name = "dataFinal")
+    @Column(name = "data_final", nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataFinal;
 
-    @Column(name = "organizador")
-    private String organizador;
-
-    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private TipoEventoEnum status;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name = "organizador_id")
+    private Pessoa organizador;
+
+    public Long getIdEvento() {
+        return idEvento;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEvento(Long idEvento) {
+        this.idEvento = idEvento;
     }
 
     public String getNome() {
@@ -50,12 +53,12 @@ public class Evento {
         this.nome = nome;
     }
 
-    public String getLocal() {
-        return local;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDateTime getDataInicio() {
@@ -74,14 +77,6 @@ public class Evento {
         this.dataFinal = dataFinal;
     }
 
-    public String getOrganizador() {
-        return organizador;
-    }
-
-    public void setOrganizador(String organizador) {
-        this.organizador = organizador;
-    }
-
     public TipoEventoEnum getStatus() {
         return status;
     }
@@ -90,16 +85,12 @@ public class Evento {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Evento{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", local='" + local + '\'' +
-                ", dataInicio=" + dataInicio +
-                ", dataFinal=" + dataFinal +
-                ", organizador='" + organizador + '\'' +
-                ", status=" + status +
-                '}';
+    public Pessoa getOrganizador() {
+        return organizador;
     }
+
+    public void setOrganizador(Pessoa organizador) {
+        this.organizador = organizador;
+    }
+
 }
