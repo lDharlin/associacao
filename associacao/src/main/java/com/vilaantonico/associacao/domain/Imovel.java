@@ -2,7 +2,11 @@ package com.vilaantonico.associacao.domain;
 
 import com.vilaantonico.associacao.domain.enums.TipoImovelEnum;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "imovel")
 public class Imovel {
@@ -11,53 +15,22 @@ public class Imovel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "desc_imovel", nullable = false)
+    @Column(name = "imovel_descricao", nullable = false)
     private String descricao;
 
-    @Column(name = "end_imovel", nullable = false, length = 156)
-    private String endereco;
+    @ManyToOne
+    @JoinColumn(name = "imovel_endereco_id")
+    private Endereco endereco;
 
     @Enumerated(EnumType.STRING)
     private TipoImovelEnum tipo;
 
-
     public Imovel() {
     }
 
-    public Imovel(String descricao, String endereco) {
+    public Imovel(String descricao, Endereco endereco, TipoImovelEnum tipo) {
         this.descricao = descricao;
         this.endereco = endereco;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public TipoImovelEnum getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoImovelEnum tipo) {
         this.tipo = tipo;
     }
 }
