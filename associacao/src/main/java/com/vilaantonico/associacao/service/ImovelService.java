@@ -1,6 +1,7 @@
 package com.vilaantonico.associacao.service;
 
 import com.vilaantonico.associacao.domain.Imovel;
+import com.vilaantonico.associacao.domain.enums.TipoImovelEnum;
 import com.vilaantonico.associacao.repository.ImovelRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class ImovelService {
     public Optional<Imovel> buscarPorId(Long id){
         return repository.findById(id);
     }
+
+    public List<Imovel> buscarPorEndereco(Long enderecoId){return repository.findByEnderecoId(enderecoId);}
+
+    public List<Imovel> buscarPorTipo(TipoImovelEnum tipo){return repository.findByTipo(tipo);}
 
     public Imovel salvar(Imovel imovel) {
         return repository.save(imovel);
