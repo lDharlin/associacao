@@ -30,6 +30,7 @@ public class Imovel {
 
     public Imovel(String descricao, Endereco endereco, TipoImovelEnum tipo) {
         this.descricao = descricao;
+        this.tipo = tipo;
         this.endereco = endereco;
         this.tipo = tipo;
     }

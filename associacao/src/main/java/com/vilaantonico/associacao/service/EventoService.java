@@ -34,7 +34,7 @@ public class EventoService {
     public void atualizar(Long id,Evento novoEvento) {
         Evento evento = buscarPorId(id);
         evento.setNome(novoEvento.getNome());
-        evento.setLocal(novoEvento.getLocal());
+       // evento.setLocal(novoEvento.getLocal());
         evento.setDataInicio(novoEvento.getDataInicio());
         evento.setDataFinal(novoEvento.getDataFinal());
         evento.setOrganizador(novoEvento.getOrganizador());

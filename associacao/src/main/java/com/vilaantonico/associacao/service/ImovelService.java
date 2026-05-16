@@ -2,6 +2,7 @@ package com.vilaantonico.associacao.service;
 
 import com.vilaantonico.associacao.domain.Imovel;
 import com.vilaantonico.associacao.repository.ImovelRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class ImovelService {
         repository.delete(imovel);
     }
 
-    public Imovel editarImovel(Imovel imovel){
+    public Imovel editarImovel(@NotNull Imovel imovel){
         if (repository.existsById(imovel.getId())) {
             return repository.save(imovel);
         } else {
