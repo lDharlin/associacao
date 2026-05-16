@@ -14,19 +14,24 @@ public class Imovel {
     @Column(name = "desc_imovel", nullable = false)
     private String descricao;
 
-    @Column(name = "end_imovel", nullable = false, length = 156)
-    private String endereco;
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
     @Enumerated(EnumType.STRING)
     private TipoImovelEnum tipo;
 
+    @Column(name = "valor_estimado", nullable = false)
+    private Double valorEstimado;
 
     public Imovel() {
     }
 
-    public Imovel(String descricao, String endereco) {
+    public Imovel(String descricao, TipoImovelEnum tipo, Endereco endereco, Double valorEstimado) {
         this.descricao = descricao;
+        this.tipo = tipo;
         this.endereco = endereco;
+        this.valorEstimado = valorEstimado;
     }
 
     public String getDescricao() {
@@ -45,11 +50,11 @@ public class Imovel {
         this.id = id;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
@@ -59,5 +64,13 @@ public class Imovel {
 
     public void setTipo(TipoImovelEnum tipo) {
         this.tipo = tipo;
+    }
+
+    public Double getValorEstimado() {
+        return valorEstimado;
+    }
+
+    public void setValorEstimado(Double valorEstimado) {
+        this.valorEstimado = valorEstimado;
     }
 }
